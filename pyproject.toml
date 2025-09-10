@@ -1,0 +1,77 @@
+[project]
+name = "weather-mcp-server"
+version = "0.1.0"
+description = "Weather MCP server providing forecasts and alerts via National Weather Service API"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["weather", "mcp", "server", "forecast", "alerts", "nws"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+    "mcp[cli]>=1.13.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/weather-mcp-server"
+Repository = "https://github.com/yourusername/weather-mcp-server.git"
+Issues = "https://github.com/yourusername/weather-mcp-server/issues"
+
+[project.scripts]
+weather-mcp-server = "weather:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+only-include = ["weather.py", "main.py"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "weather.py",
+    "main.py", 
+    "README.md",
+    "LOGGING.md",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.20.0",
+    "black>=22.0.0",
+    "isort>=5.0.0",
+    "mypy>=1.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
